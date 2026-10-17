@@ -80,11 +80,12 @@ a{color:inherit;text-decoration:none}
 .btn-full{width:100%}
 
 /* hero */
-.hero{position:relative;overflow:hidden;color:#F4F1EA;min-height:460px;display:flex;align-items:flex-end;
+.hero{position:relative;overflow:hidden;color:#F4F1EA;min-height:500px;display:flex;align-items:flex-end;
   background:
     linear-gradient(92deg, rgba(22,20,24,.96) 0%, rgba(22,20,24,.88) 38%, rgba(22,20,24,.45) 62%, rgba(22,20,24,.05) 100%),
     linear-gradient(180deg, rgba(22,20,24,.15) 0%, rgba(22,20,24,0) 40%, rgba(22,20,24,.55) 100%),
-    url("img/hero.jpg") 80% 0%/cover no-repeat, #16141A}
+    url("img/hero.jpg") right bottom/auto 86% no-repeat,
+    url("img/hero_blur.jpg") center/cover no-repeat, #16141A}
 .hero > div{max-width:58%}
 .hero .pill{background:rgba(255,255,255,.12);color:#EDE6D6}
 .hero .pill i{background:#D9B36A}
@@ -103,7 +104,8 @@ a{color:inherit;text-decoration:none}
   .hero{min-height:560px;align-items:flex-end;
     background:
       linear-gradient(180deg, rgba(22,20,24,.05) 0%, rgba(22,20,24,.35) 38%, rgba(22,20,24,.94) 62%, rgba(22,20,24,.98) 100%),
-      url("img/hero.jpg") 62% 0%/cover no-repeat, #16141A}
+      url("img/hero.jpg") 72% 0%/auto 70% no-repeat,
+      url("img/hero_blur.jpg") center/cover no-repeat, #16141A}
   .hero > div{max-width:100%}
   .hero .cta .btn{flex:1}
   .hero-name{top:16px;bottom:auto;right:16px}
@@ -206,6 +208,23 @@ footer{max-width:740px;margin:0 auto;padding:0 18px 20px;font-size:11.5px;color:
 .sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));
   background:var(--card);border-top:1px solid var(--line)}
 .sticky .btn{flex:1;padding:13px 10px;font-size:14.5px}
+/* motion */
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+.js .hero .pill,.js .hero h1,.js .hero p,.js .hero .cta{animation:up .7s cubic-bezier(.2,.7,.2,1) both}
+.js .hero h1{animation-delay:.08s}.js .hero p{animation-delay:.16s}.js .hero .cta{animation-delay:.24s}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.btn{position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s ease}
+.btn:hover::after{transform:translateX(120%)}
+.hero .btn-b{animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(217,179,106,.45)}50%{box-shadow:0 0 0 10px rgba(217,179,106,0)}}
+.card{transition:transform .25s ease,box-shadow .25s ease}
+.card:not(.hero):not(.final):hover{transform:translateY(-3px);box-shadow:0 2px 6px rgba(15,23,42,.05),0 18px 40px -18px rgba(15,23,42,.32)}
+.four > div,.proc > div,.svc{transition:transform .2s ease}
+.four > div:hover,.proc > div:hover,.svc:hover{transform:translateY(-2px)}
+@media(prefers-reduced-motion:reduce){.js .rv,.js .hero *,.hero .btn-b,.btn::after{animation:none!important;transition:none!important;opacity:1!important;transform:none!important}}
+
 @media(min-width:741px){.sticky{display:none}body{padding-bottom:0}}
 </style>
 
@@ -224,13 +243,13 @@ footer{max-width:740px;margin:0 auto;padding:0 18px 20px;font-size:11.5px;color:
     <div class="hero-name"><b>강승현 팀장</b>프라임에셋 316본부 · 우수인증설계사</div>
   </section>
 
-  <section class="card stats">
-    <div><b class="tnum">10년차</b><span>보험설계사 근속</span></div>
+  <section class="card stats rv">
+    <div><b class="tnum" data-count="10" data-suffix="년차">10년차</b><span>보험설계사 근속</span></div>
     <div><b class="tnum">2년 연속</b><span>우수인증설계사 선발</span></div>
-    <div><b class="tnum">31개사</b><span>전 보험사 비교</span></div>
+    <div><b class="tnum" data-count="31" data-suffix="개사">31개사</b><span>전 보험사 비교</span></div>
   </section>
 
-  <section class="card">
+  <section class="card rv">
     <h2>내 보험, 제대로 비교해 보셨나요?</h2>
     <p class="lead">가입만 해두고 몇 년째 그대로인 보험, 중복되거나 비어 있는 보장은 없는지 무료로 봐 드려요.</p>
     <div class="photo"><img src="img/docs.jpg" alt="책상 위에 놓인 보험 서류" width="1200" height="675"></div>
@@ -242,7 +261,7 @@ footer{max-width:740px;margin:0 auto;padding:0 18px 20px;font-size:11.5px;color:
     </ul>
   </section>
 
-  <section class="card">
+  <section class="card rv">
     <h2>상담 서비스 안내</h2>
     <p class="lead">두 가지 모두 비용은 없습니다. 결과만 받아보고 끝내셔도 돼요.</p>
     <div class="svcs">
@@ -261,7 +280,7 @@ footer{max-width:740px;margin:0 auto;padding:0 18px 20px;font-size:11.5px;color:
     </div>
   </section>
 
-  <section class="card">
+  <section class="card rv">
     <h2>왜 강승현인가요</h2>
     <table class="cmp">
       <thead><tr><th></th><th class="me">강승현</th><th>일반 설계사</th></tr></thead>
@@ -274,12 +293,12 @@ footer{max-width:740px;margin:0 auto;padding:0 18px 20px;font-size:11.5px;color:
     </table>
   </section>
 
-  <section class="card">
+  <section class="card rv">
     <span class="pill"><i></i>실제 비교 결과</span>
     <h2>같은 보장인데 총 납입액이 이만큼 갈립니다</h2>
     <p class="lead">45세 남성 고객님, 종합(무해지형) 20년납 100세 만기 조건으로 31개사를 조회한 결과예요.</p>
     <div class="big">
-      <div class="n"><small>총 납입 보험료 차이</small><b class="tnum">775만원</b><span>월로는 32,308원이에요</span></div>
+      <div class="n"><small>총 납입 보험료 차이</small><b class="tnum" data-count="775" data-suffix="만원">775만원</b><span>월로는 32,308원이에요</span></div>
       <table>
         <tr><th></th><td class="lo">최저</td><td class="hi">최대</td></tr>
         <tr><th>보험사</th><td class="lo">DB손보</td><td class="hi">MG손보</td></tr>
@@ -290,7 +309,7 @@ footer{max-width:740px;margin:0 auto;padding:0 18px 20px;font-size:11.5px;color:
     <p class="note">손해보험·생명보험 2025-03-10 조회 기준. 나이·성별·담보에 따라 달라지니 상담 때 고객님 조건으로 다시 뽑아 드려요.</p>
   </section>
 
-  <section class="card">
+  <section class="card rv">
     <h2>증권 주시면 네 가지를 같이 봐 드려요</h2>
     <div class="four">
       <div><i>1</i><div><b>보장 범위</b><p>사망·장해·암·뇌·심장처럼 1억 원이 드는 큰 위험부터 채워져 있는지 봅니다.</p></div></div>
@@ -301,7 +320,7 @@ footer{max-width:740px;margin:0 auto;padding:0 18px 20px;font-size:11.5px;color:
     <div class="photo" style="margin-bottom:0"><img src="img/house.jpg" alt="집 모형과 열쇠" width="1200" height="675"></div>
   </section>
 
-  <section class="card">
+  <section class="card rv">
     <h2>상담 절차</h2>
     <div class="proc">
       <div><i>1</i><b>연락 주세요</b><p>전화나 문자로 증권 사진만 보내주시면 됩니다.</p></div>
@@ -310,7 +329,7 @@ footer{max-width:740px;margin:0 auto;padding:0 18px 20px;font-size:11.5px;color:
     </div>
   </section>
 
-  <section class="card">
+  <section class="card rv">
     <h2>인증</h2>
     <div class="cert">
       <img src="img/emblem.png" alt="우수인증설계사 엠블럼" width="440" height="440">
@@ -318,7 +337,7 @@ footer{max-width:740px;margin:0 auto;padding:0 18px 20px;font-size:11.5px;color:
     </div>
   </section>
 
-  <section class="card" id="faq">
+  <section class="card rv" id="faq">
     <h2>자주 묻는 질문</h2>
     <details open><summary>상담받으면 꼭 가입해야 하나요?</summary><div class="a">아니요~ 보장분석 현황이 괜찮으면 유지하시는 게 가장 좋습니다! 문제 있을 때만 상세히 설명드려요.</div></details>
     <details><summary>상담료가 드나요?</summary><div class="a">받지 않아요~ 상담료는 무료입니다!</div></details>
@@ -326,7 +345,7 @@ footer{max-width:740px;margin:0 auto;padding:0 18px 20px;font-size:11.5px;color:
     <details><summary>증권이 어디 있는지 모르겠어요.</summary><div class="a">괜찮아요! 문의 주시면 설계 동의 링크를 보내드려요. 링크에서 인증만 해주시면 제가 면밀히 진단해드릴 수 있어요!</div></details>
   </section>
 
-  <section class="card final" id="contact">
+  <section class="card final rv" id="contact">
     <h2>갖고 계신 보험, 바로 점검해보세요!</h2>
     <p class="lead">수백만원에서 수천만원까지 아낄 수 있습니다.</p>
     <div class="cta">
@@ -346,6 +365,29 @@ footer{max-width:740px;margin:0 auto;padding:0 18px 20px;font-size:11.5px;color:
   <a class="btn btn-o" href="sms:01092867134">문자 상담</a>
   <a class="btn btn-b" href="tel:01092867134">무료 점검 전화</a>
 </div>
+
+<script>
+(function(){
+  document.documentElement.classList.add('js');
+  var rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = [].slice.call(document.querySelectorAll('.rv'));
+  if (rm || !('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in'); }); return; }
+  var io = new IntersectionObserver(function(en){
+    en.forEach(function(x){ if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } });
+  }, {rootMargin: '0px 0px -8% 0px', threshold: .08});
+  els.forEach(function(e){ io.observe(e); });
+  function run(el){
+    var to = +el.dataset.count, suf = el.dataset.suffix || '', t0 = null;
+    function f(t){ if (!t0) t0 = t; var p = Math.min(1, (t - t0) / 900); p = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(to * p) + suf; if (p < 1) requestAnimationFrame(f); }
+    requestAnimationFrame(f);
+  }
+  var io2 = new IntersectionObserver(function(en){
+    en.forEach(function(x){ if (x.isIntersecting) { run(x.target); io2.unobserve(x.target); } });
+  }, {threshold: .5});
+  [].slice.call(document.querySelectorAll('[data-count]')).forEach(function(n){ io2.observe(n); });
+})();
+</script>
 
 </body>
 </html>
